@@ -38,8 +38,7 @@ This an optional parameter, and if not present a wildcard (.\*) will be used.
   [e-books]  
   rss=http://rss.thepiratebay.se/301
 
-Crontab
-=======
+## Crontab
 This software is not a daemon, and it should run in a cron-like software.  
 There is no need to configure the cron using some kind of "just in case"  
 configuration to avoid the start of many process of rss2rtorrent, it will  
