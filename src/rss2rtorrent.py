@@ -8,6 +8,7 @@ import socket
 
 def save_magnetic_links(directory, series):
 
+    directory = os.path.expanduser(directory)
     for serie in series:
         name = 'meta-%s.torrent' % (serie['infohash'])
         filename = os.path.join(directory, name)
@@ -48,13 +49,13 @@ def get_lock():
 if __name__ == '__main__':
 
     get_lock()
-    config = ConfigParser.RawConfigParser()
+    config = ConfigParser.RawConfigParser({'series':'.*'})
     config.read(os.path.expanduser('~/.config/rss2rtorrent/feed.cfg'))
-    watch_directory = config.get('rtorrent', 'watch_directory')
+    watch_directory = config.get('torrent', 'watch_directory')
   
     #rtorrent section is a special section
     for section in config.sections():
-        if section == 'rtorrent':
+        if section == 'torrent':
             continue
 
         series = config.get(section, 'series')
