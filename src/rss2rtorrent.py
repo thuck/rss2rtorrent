@@ -13,7 +13,7 @@ def save_magnetic_links(directory, series):
         filename = os.path.join(directory, name)
 
         #As this problably will run in a crontab, it's better to check if the file exists
-        if os.path.exists(filename):
+        if not os.path.exists(filename):
             with open(filename, 'w') as magnet_file:
                 magnet_file.write('d10:magnet-uri%s:%se' % (len(serie['magneturi']), serie['magneturi']))
 
