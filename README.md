@@ -1,15 +1,15 @@
-rss2rtorrent
-============
+# rss2rtorrent
+
 This project will allow to use the rss to automatically add torrents to rtorrent.  
 The current focus is The Piratebay, but this should be extended in the future.  
 
-Configuration File
-==================
+## Configuration File
+
 The configuration file should be placed on the path:  
 *~/.config/rss2rtorrent/feed.cfg*  
 
-Sections
---------
+## Sections
+
 ### [torrent]  
 Global configuration.
 
