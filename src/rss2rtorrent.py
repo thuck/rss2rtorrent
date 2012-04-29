@@ -20,6 +20,8 @@ def save_magnetic_links(directory, series):
 
 def save_torrent_file(directory, series):
     #TODO:create the .torrent file
+    #f['items'][0]['links'][1]['href']
+
     pass
 
 def get_series(series, rss):
