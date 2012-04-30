@@ -29,14 +29,21 @@ You'll need as many sections as you will have feeds
 You can include any regex that you want, and separate it using commas.  
 This an optional parameter, and if not present a wildcard (.\*) will be used.
 * rss - This parameter should be a valid feed.
+* type - There is two possible values for this parameter magnet\_link or torrent.  
+torrent is the default one, so if nothing is declared torrent will be used.
 
 #### Example:
   [eztv]  
   series=House, Silent Witness, conan  
+  type=magnet\_link  
   rss=http://rss.thepiratebay.se/user/d17c6a45441ce0bc0c057f19057f95e1
 
   [e-books]  
+  type=magnet\_link  
   rss=http://rss.thepiratebay.se/301
+
+  [isohunt]  
+  rss=http://isohunt.com/js/rss/?iht=1
 
 ## Crontab
 This software is not a daemon, and it should run in a cron-like software.  
