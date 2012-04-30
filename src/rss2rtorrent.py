@@ -22,7 +22,7 @@ def save_magnetic_links(directory, series):
 def save_torrent_files(directory, series):
 
     for serie in series:
-        name = '%s.torrent' % (base64.urlsafe_b64encode(serie['title']))
+        name = '%s.torrent' % (base64.urlsafe_b64encode(serie['title'].encode('utf8')))
         filename = os.path.join(directory, name)
 
         if not os.path.exists(filename):
