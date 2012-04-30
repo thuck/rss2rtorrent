@@ -5,10 +5,11 @@ import os.path
 import sys
 import re
 import socket
+import urllib2
+import base64
 
 def save_magnetic_links(directory, series):
 
-    directory = os.path.expanduser(directory)
     for serie in series:
         name = 'meta-%s.torrent' % (serie['infohash'])
         filename = os.path.join(directory, name)
@@ -18,11 +19,16 @@ def save_magnetic_links(directory, series):
             with open(filename, 'w') as magnet_file:
                 magnet_file.write('d10:magnet-uri%s:%se' % (len(serie['magneturi']), serie['magneturi']))
 
-def save_torrent_file(directory, series):
-    #TODO:create the .torrent file
-    #f['items'][0]['links'][1]['href']
+def save_torrent_files(directory, series):
 
-    pass
+    for serie in series:
+        name = '%s.torrent' % (base64.urlsafe_b64encode(serie['title']))
+        filename = os.path.join(directory, name)
+
+        if not os.path.exists(filename):
+            with open(filename, 'w') as torrent_file:
+                #TODO: Need to catch the expection in case of network problem
+                torrent_file.write(urllib2.urlopen(serie['links'][1]['href']).read())
 
 def get_series(series, rss):
 
@@ -51,9 +57,9 @@ def get_lock():
 if __name__ == '__main__':
 
     get_lock()
-    config = ConfigParser.RawConfigParser({'series':'.*'})
+    config = ConfigParser.RawConfigParser({'series':'.*', 'type':'torrent'})
     config.read(os.path.expanduser('~/.config/rss2rtorrent/feed.cfg'))
-    watch_directory = config.get('torrent', 'watch_directory')
+    watch_directory = os.path.expanduser(config.get('torrent', 'watch_directory'))
   
     #rtorrent section is a special section
     for section in config.sections():
@@ -62,6 +68,16 @@ if __name__ == '__main__':
 
         series = config.get(section, 'series')
         rss = config.get(section, 'rss')
-        save_magnetic_links(watch_directory, get_series(series, rss))
+        download_type = config.get(section, 'type')
+
+        if download_type == 'magnet_link':
+            save_magnetic_links(watch_directory, get_series(series, rss))
+
+        elif download_type == 'torrent':
+            save_torrent_files(watch_directory, get_series(series, rss))
+
+        else:
+            #TODO: Log error for invalid configuration
+            pass
 
     sys.exit(0)
