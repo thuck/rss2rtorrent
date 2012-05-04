@@ -10,15 +10,19 @@ The configuration file should be placed on the path:
 
 ## Sections
 
-### [torrent]  
+### [DEFAULT]  
 Global configuration.
 
 #### Valid parameters:  
-* watch\_directory - Directory that rtorrent watch to start automatically the torrents. 
+* watch\_directory - Directory that rtorrent watch to start automatically the torrents. Default: ~/watch
+* http - Proxy configuration for http connections. Default: None
+* https - Proxy configuration for https connections. Default: None
 
 #### Example:
-   [torrent]  
-   watch\_directory=~/rtorrent/watch
+   [DEFAULT]  
+   watch\_directory=~/watch
+   http=http://localhost:8080
+   https=https://localhost:8085
 
 ### [feed]
 This section has no special name, and as many as you want can be used.  

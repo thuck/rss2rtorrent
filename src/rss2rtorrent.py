@@ -57,26 +57,29 @@ def get_lock():
 if __name__ == '__main__':
 
     get_lock()
-    config = ConfigParser.RawConfigParser({'series':'.*', 'type':'torrent'})
-    config.read(os.path.expanduser('~/.config/rss2rtorrent/feed.cfg'))
-    watch_directory = os.path.expanduser(config.get('torrent', 'watch_directory'))
-  
-    #rtorrent section is a special section
-    for section in config.sections():
-        if section == 'torrent':
-            continue
+    config = ConfigParser.RawConfigParser({'series':'.*', 'type':'torrent',
+                                           'http':None, 'https':None},
+                                           'watch_directory':'~/watch')
 
+    config.read(os.path.expanduser('~/.config/rss2rtorrent/feed.cfg'))
+
+    for section in config.sections():
+
+        watch_directory = os.path.expanduser(config.get('torrent', 
+                                                        'watch_directory'))
         series = config.get(section, 'series')
         rss = config.get(section, 'rss')
         download_type = config.get(section, 'type')
+        series_list = get_series(series, rss)
 
         if download_type == 'magnet_link':
-            save_magnetic_links(watch_directory, get_series(series, rss))
+            save_magnetic_links(watch_directory, series_list) 
 
         elif download_type == 'torrent':
-            save_torrent_files(watch_directory, get_series(series, rss))
+            save_torrent_files(watch_directory, series_list)
 
         else:
+            print '%s: download_type has an invalid value' % (section)
             #TODO: Log error for invalid configuration
             pass
 
