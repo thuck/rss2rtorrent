@@ -20,9 +20,9 @@ Global configuration.
 
 #### Example:
    [DEFAULT]  
-   watch\_directory=~/watch
-   http=http://localhost:8080
-   https=https://localhost:8085
+   watch\_directory=~/watch  
+   http=http://localhost:8080  
+   https=https://localhost:8085  
 
 ### [feed]
 This section has no special name, and as many as you want can be used.  
