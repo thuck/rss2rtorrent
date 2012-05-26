@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Rss2rtorrent : This project will allow to use the rss from The Piratebay to automatically update the rtorrent." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Rss2rtorrent</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/thuck/rss2rtorrent">View on GitHub</a>
+
+          <h1 id="project_title">Rss2rtorrent</h1>
+          <h2 id="project_tagline">This project will allow to use the rss from The Piratebay to automatically update the rtorrent.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/thuck/rss2rtorrent/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/thuck/rss2rtorrent/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>rss2rtorrent</h1>
+
+<p>This project will allow to use the rss to automatically add torrents to rtorrent.<br>
+The current focus is The Piratebay, but this should be extended in the future.  </p>
+
+<h2>Configuration File</h2>
+
+<p>The configuration file should be placed on the path:<br><em>~/.config/rss2rtorrent/feed.cfg</em>  </p>
+
+<h2>Sections</h2>
+
+<h3>[torrent]</h3>
+
+<p>Global configuration.</p>
+
+<h4>Valid parameters:</h4>
+
+<ul>
+<li>watch_directory - Directory that rtorrent watch to start automatically the torrents. </li>
+</ul><h4>Example:</h4>
+
+<p>[torrent]<br>
+   watch_directory=~/rtorrent/watch</p>
+
+<h3>[feed]</h3>
+
+<p>This section has no special name, and as many as you want can be used.<br>
+You'll need as many sections as you will have feeds</p>
+
+<h4>Valid parameters:</h4>
+
+<ul>
+<li>series - This parameter is used to filter the series.<br>
+You can include any regex that you want, and separate it using commas.<br>
+This an optional parameter, and if not present a wildcard (.*) will be used.</li>
+<li>rss - This parameter should be a valid feed.</li>
+<li>type - There is two possible values for this parameter magnet_link or torrent.<br>
+torrent is the default one, so if nothing is declared torrent will be used.</li>
+</ul><h4>Example:</h4>
+
+<p>[eztv]<br>
+  series=House, Silent Witness, conan<br>
+  type=magnet_link<br>
+  rss=<a href="http://rss.thepiratebay.se/user/d17c6a45441ce0bc0c057f19057f95e1">http://rss.thepiratebay.se/user/d17c6a45441ce0bc0c057f19057f95e1</a></p>
+
+<p>[e-books]<br>
+  type=magnet_link<br>
+  rss=<a href="http://rss.thepiratebay.se/301">http://rss.thepiratebay.se/301</a></p>
+
+<p>[isohunt]<br>
+  rss=<a href="http://isohunt.com/js/rss/?iht=1">http://isohunt.com/js/rss/?iht=1</a></p>
+
+<h2>Crontab</h2>
+
+<p>This software is not a daemon, and it should run in a cron-like software.<br>
+There is no need to configure the cron using some kind of "just in case"<br>
+configuration to avoid the start of many process of rss2rtorrent, it will<br>
+automatically detect that another rss2rtorrent is running and will exit.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Rss2rtorrent maintained by <a href="https://github.com/thuck">thuck</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
